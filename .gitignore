@@ -1,0 +1,83 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build
+dist/
+build/
+.next/
+out/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS File
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# AI / Tooling metadata
+.gemini/
+.agent/
+.agents/
+.brain/
+.system_generated/
+/_tmp/
+
+# Firebase
+.firebase/
+firebase.json
+firestore.rules
+firestore.indexes.json
+database.rules.json
+storage.rules
+service-account.json
+
+# Configuration Secrets
+config.js
+secrets.js
+credentials.json
+auth_config.js
+
+# Local Debug
+.pnp
+.pnp.js
+.cache/
+.eslintcache
+.stylelintcache
+node_modules/
+
+# IDE / Editor Settings
+.vscode/
+.idea/
+.project
+.settings/
+.directory
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.swo
+
+# OS / System
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/

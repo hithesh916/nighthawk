@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NIGHT HAWK — The Art of Performance</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=UnifrakturCook:wght@700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            alabaster: '#F9F8F6',
+            charcoal: '#1A1A1A',
+            taupe: '#EBE5DE',
+            warmgrey: '#6C6863',
+            gold: '#D4AF37',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          letterSpacing: {
+            wide: '0.1em',
+            wider: '0.2em',
+            widest: '0.3em',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-alabaster text-charcoal antialiased relative">
+
+  <!-- LUXURY STRUCTURAL BACKDROP -->
+  <div class="noise-overlay"></div>
+  <div class="editorial-grid">
+    <div class="grid-line"></div>
+    <div class="grid-line hidden md:block"></div>
+    <div class="grid-line hidden md:block"></div>
+    <div class="grid-line hidden xl:block"></div>
+    <div class="grid-line"></div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav
+    class="fixed top-0 w-full z-40 bg-alabaster/90 backdrop-blur-md border-b opacity-100 border-charcoal/10 transition-all duration-700">
+    <div class="max-w-[1600px] mx-auto px-8 md:px-16 flex items-center justify-between h-20">
+      <a href="index.html" class="flex items-center group">
+        <img src="logo.png"
+          class="h-8 md:h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
+          alt="NIGHT HAWK">
+      </a>
+
+      <ul class="hidden lg:flex space-x-12">
+        <li><a href="mens.html"
+            class="text-xs uppercase tracking-widest text-charcoal hover:text-gold transition-colors duration-500">Pour
+            Homme</a></li>
+        <li><a href="womens.html"
+            class="text-xs uppercase tracking-widest text-charcoal hover:text-gold transition-colors duration-500">Pour
+            Femme</a></li>
+        <li><a href="index.html#products"
+            class="text-xs uppercase tracking-widest text-charcoal hover:text-gold transition-colors duration-500">The
+            Catalog</a></li>
+        <li><a href="#about"
+            class="text-xs uppercase tracking-widest text-warmgrey hover:text-charcoal transition-colors duration-500">The
+            Process</a></li>
+      </ul>
+
+      <div class="flex items-center space-x-4 md:space-x-8">
+        <!-- Search Button Trigger -->
+        <button class="text-charcoal hover:text-gold transition-colors duration-500" onclick="toggleSearch()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="square">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+        </button>
+        <button class="text-charcoal hover:text-gold transition-colors duration-500"
+          onclick="window.location.href='login.html'">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="square">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+        </button>
+        <button class="text-charcoal flex items-center space-x-2 group" id="cartBtn" onclick="openCart()">
+          <svg class="group-hover:text-gold transition-colors duration-500" width="20" height="20" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg>
+          <span class="text-xs font-medium" id="cartCount">0</span>
+        </button>
+
+        <!-- Mobile Menu Trigger -->
+        <button class="lg:hidden text-charcoal hover:text-gold transition-colors duration-500"
+          onclick="toggleMobileMenu()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="12" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section
+    class="relative min-h-[70vh] md:min-h-[85vh] w-full max-w-[1600px] mx-auto px-8 md:px-16 pt-24 pb-12 flex flex-col justify-end">
+    <!-- Asymmetric Image Layout -->
+    <div
+      class="absolute top-[10%] md:top-[12%] right-8 md:right-16 md:w-[32%] lg:w-[35%] aspect-[3/4] z-0 group hidden md:block reveal">
+      <div class="w-full h-full relative img-shadow-wrapper">
+        <img src="products/hero_vol1.jpg" alt="Night Hawk Vol. 01" class="cinematic-img">
+        <!-- Inner Border for Depth -->
+        <div class="absolute inset-0 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.06)] pointer-events-none"></div>
+      </div>
+      <!-- Vertical Label -->
+      <div class="absolute -left-12 top-10 vertical-text">Collection / Vol. 01</div>
+      <!-- Rotating Pro Element -->
+      <div
+        class="absolute -bottom-12 -right-12 floating-circle bg-alabaster/40 backdrop-blur-sm shadow-sm hidden lg:flex">
+        Est. MCMXCII — Night Hawk
+      </div>
+    </div>
+
+    <div class="relative z-10 w-full md:w-[85%] lg:w-[75%]">
+      <div class="flex items-center space-x-6 mb-4 reveal">
+        <div class="h-px w-10 bg-charcoal"></div>
+        <span class="text-xs uppercase tracking-extrawide text-warmgrey">The New Standard</span>
+      </div>
+
+      <!-- PREMIUM MUSIC PLAYER COMPONENT -->
+      <div class="mb-12 reveal" style="transition-delay: 200ms;">
+        <div class="music-player-card">
+          <div class="player-inner">
+            <div class="album-art-wrapper" id="albumArt">
+              <div class="vinyl-record">
+                <div class="record-center"></div>
+                <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=600" alt="Album Art"
+                  class="album-img">
+              </div>
+            </div>
+
+            <div class="player-info">
+              <div class="metadata">
+                <h3 class="serif text-xl tracking-wide text-charcoal">This Little Light of Mine</h3>
+                <p class="text-[10px] uppercase tracking-widest text-warmgrey">Gospel Archive / Series 1</p>
+              </div>
+
+              <div class="controls-area">
+                <div class="time-container">
+                  <span id="currentTime" class="text-[10px] tabular-nums">0:00</span>
+                  <div class="seek-track" id="seekBar">
+                    <div class="seek-progress" id="seekProgress"></div>
+                  </div>
+                  <span id="totalTime" class="text-[10px] tabular-nums">0:00</span>
+                </div>
+
+                <div class="action-buttons">
+                  <button id="playBtn" class="play-trigger group">
+                    <svg id="playIcon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"
+                      class="transition-transform duration-300 group-hover:scale-110">
+                      <path d="M5 3l14 9-14 9V3z" />
+                    </svg>
+                    <svg id="pauseIcon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="hidden">
+                      <rect x="6" y="4" width="4" height="16" />
+                      <rect x="14" y="4" width="4" height="16" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Global Audio Element -->
+          <audio id="mainAudio" preload="auto">
+            <source
+              src="music/Miles Caton, DC6 Singers Collective, Pleasant Valley Youth Choir of New Orleans - This Little Light of Mine (SPOTISAVER).mp3"
+              type="audio/mpeg">
+          </audio>
+        </div>
+      </div>
+
+      <h1
+        class="serif text-5xl md:text-6xl lg:text-[5.5rem] leading-[0.9] text-charcoal mb-8 tracking-tight reveal-text">
+        Curated <br> <span class="italic text-gold italic">Excellence.</span>
+      </h1>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
+        <div class="md:col-span-4 md:col-start-1 reveal" style="transition-delay: 200ms;">
+          <a href="#products" class="btn-luxury w-full md:w-auto">
+            <span class="btn-bg-gold"></span>
+            <span class="btn-text text-xs tracking-widest">Explore The Catalog</span>
+          </a>
+        </div>
+        <div class="md:col-span-5 md:col-start-6 reveal" style="transition-delay: 400ms;">
+          <p class="text-base text-charcoal leading-relaxed font-light">
+            Elegance born from restraint, precision, and depth. Every raw seam engineered for architectural perfection
+            and rigorous performance.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- THE CATALOG -->
+  <section id="products" class="w-full bg-charcoal text-alabaster py-24 md:py-40 reveal">
+    <div class="max-w-[1600px] mx-auto px-8 md:px-16">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 md:mb-32">
+        <div>
+          <div class="flex items-center space-x-6 mb-6 reveal">
+            <div class="h-px w-12 bg-alabaster/40"></div>
+            <span class="text-xs uppercase tracking-extrawide text-taupe">Vol. 01</span>
+          </div>
+          <h2 class="serif text-5xl md:text-7xl leading-tight reveal-text">The <span
+              class="italic text-gold">Editions</span></h2>
+        </div>
+
+        <!-- Minimalist Underline Filters -->
+        <div class="flex overflow-x-auto whitespace-nowrap space-x-8 md:space-x-10 pb-4 md:pb-2 no-scrollbar">
+          <button
+            class="text-xs uppercase tracking-widest text-alabaster hover:text-gold transition-colors duration-500"
+            onclick="filterProducts('All', this)">The Entire Edit</button>
+          <button class="text-xs uppercase tracking-widest text-taupe hover:text-gold transition-colors duration-500"
+            onclick="filterProducts('Men', this)">Pour Homme</button>
+          <button class="text-xs uppercase tracking-widest text-taupe hover:text-gold transition-colors duration-500"
+            onclick="filterProducts('Women', this)">Pour Femme</button>
+        </div>
+      </div>
+
+      <!-- Inject Vanilla Script's Product Grid Here but style it via global Tailwind overloads in script.js (if necessary)! -->
+      <!-- For immediate design impact, we will let default HTML render and adapt the script output to match elegant lines later. -->
+      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 sm:gap-x-8 gap-y-10 sm:gap-y-16"
+        id="productsGrid">
+        <!-- Content rendered by script.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CART UI -->
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+  <div class="cart-panel" id="cartPanel">
+    <div class="px-8 py-8 border-b border-charcoal/10 flex justify-between items-center bg-alabaster shrink-0">
+      <h3 class="serif text-3xl tracking-wide text-charcoal">The Bag</h3>
+      <button onclick="closeCart()" class="text-charcoal hover:text-gold transition-colors duration-500">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </svg>
+      </button>
+    </div>
+    <div class="flex-1 overflow-y-auto px-8 py-8 bg-alabaster" id="cartBody">
+      <!-- Populated by JS -->
+    </div>
+    <div class="border-t border-charcoal/10 bg-alabaster p-8 shrink-0" id="cartFooter">
+      <div class="flex justify-between items-end mb-8">
+        <span class="text-xs uppercase tracking-widest text-warmgrey">Subtotal</span>
+        <span class="font-serif text-2xl tracking-wide text-charcoal" id="cartTotalPrice">₹0</span>
+      </div>
+      <button class="btn-luxury w-full" onclick="location.href='checkout.html'">
+        <span class="btn-bg-gold"></span>
+        <span class="btn-text">Secure Checkout</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- MOBILE MENU DRAWER -->
+  <div class="fixed inset-0 bg-alabaster z-[110] transition-transform duration-700 translate-x-full" id="mobileMenu">
+    <div class="flex flex-col h-full px-8 py-12">
+      <div class="flex justify-between items-center mb-24">
+        <img src="logo.png" class="h-10 w-auto" alt="Logo">
+        <button onclick="toggleMobileMenu()" class="text-charcoal">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <ul class="space-y-10">
+        <li><a href="mens.html" class="serif text-5xl text-charcoal hover:text-gold transition-colors block">Men</a>
+        </li>
+        <li><a href="womens.html" class="serif text-5xl text-charcoal hover:text-gold transition-colors block">Women</a>
+        </li>
+        <li><a href="index.html#products" onclick="toggleMobileMenu()"
+            class="serif text-5xl text-charcoal hover:text-gold transition-colors block">Catalog</a></li>
+        <li><a href="login.html"
+            class="text-xs uppercase tracking-widest text-warmgrey block pt-8 border-t border-charcoal/10">Member
+            Login</a></li>
+      </ul>
+
+      <div class="mt-auto">
+        <p class="text-[10px] uppercase tracking-widest text-warmgrey mb-4">The Archive Study</p>
+        <div class="flex space-x-6">
+          <a href="#" class="text-xs text-charcoal">Instagram</a>
+          <a href="#" class="text-xs text-charcoal">X / 26</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEARCH OVERLAY -->
+  <div class="fixed inset-0 bg-alabaster z-[100] transition-opacity duration-700 opacity-0 pointer-events-none"
+    id="searchOverlay">
+    <div class="max-w-[1000px] mx-auto px-8 pt-40">
+      <div class="flex items-center justify-between border-b border-charcoal/30 pb-4 mb-12">
+        <input type="text" id="searchInput" onkeyup="performSearch()" placeholder="THE EDITORIAL SEARCH..."
+          class="w-full bg-transparent text-4xl serif focus:outline-none italic placeholder:text-warmgrey/30">
+        <button onclick="toggleSearch()"
+          class="text-charcoal hover:text-gold transition-colors text-xs uppercase tracking-widest">Close</button>
+      </div>
+      <div id="searchResults" class="grid grid-cols-1 gap-8 max-h-[60vh] overflow-y-auto pr-4 custom-scrollbar">
+        <!-- Results populated by script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div
+    class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-charcoal text-alabaster text-[10px] uppercase tracking-widest px-8 py-4 z-[60] transform translate-y-24 opacity-0 transition-all duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.15)]"
+    id="toast">
+    Added to Bag
+  </div>
+
+  <!-- FOOTER -->
+  <footer id="contact"
+    class="w-full max-w-[1600px] mx-auto px-8 md:px-16 py-20 pb-10 border-t border-charcoal/10 reveal">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-16 mb-24">
+      <div class="md:col-span-5">
+        <img src="logo.png" class="h-10 w-auto mb-8 object-contain" alt="NIGHT HAWK">
+        <p class="text-charcoal/60 text-sm leading-relaxed max-w-sm font-light mb-12">
+          Sign up for exclusive access to restricted drops, early volume releases, and specialized editorial campaigns.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-start sm:items-end w-full max-w-md relative group">
+          <input type="email" id="emailInput" placeholder="Enter your email address"
+            class="w-full bg-transparent border-b border-charcoal py-4 text-sm font-light placeholder:font-serif placeholder:italic placeholder:text-warmgrey focus:outline-none focus:border-gold transition-colors duration-500">
+          <button
+            class="mt-4 sm:mt-0 sm:absolute right-0 bottom-4 text-xs uppercase tracking-widest font-medium hover:text-gold transition-colors duration-500"
+            onclick="subscribeEmail()">
+            Join
+          </button>
+        </div>
+      </div>
+
+      <div class="md:col-span-2 md:col-start-8">
+        <h4 class="text-xs uppercase tracking-widest text-warmgrey mb-8">The Studio</h4>
+        <ul class="space-y-4">
+          <li><button onclick="openInfoModal('About')"
+              class="text-sm font-light text-charcoal hover:text-gold transition-colors duration-500">About</button>
+          </li>
+          <li><button onclick="openInfoModal('Manifesto')"
+              class="text-sm font-light text-charcoal hover:text-gold transition-colors duration-500">Manifesto</button>
+          </li>
+          <li><button onclick="openInfoModal('Careers')"
+              class="text-sm font-light text-charcoal hover:text-gold transition-colors duration-500">Careers</button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="md:col-span-2">
+        <h4 class="text-xs uppercase tracking-widest text-warmgrey mb-8">Client Care</h4>
+        <ul class="space-y-4">
+          <li><button onclick="openInfoModal('Shipping')"
+              class="text-sm font-light text-charcoal hover:text-gold transition-colors duration-500">Shipping</button>
+          </li>
+          <li><button onclick="openInfoModal('Returns')"
+              class="text-sm font-light text-charcoal hover:text-gold transition-colors duration-500">Returns</button>
+          </li>
+          <li><button onclick="openInfoModal('Sizing')"
+              class="text-sm font-light text-charcoal hover:text-gold transition-colors duration-500">Sizing</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-charcoal/5">
+      <p class="text-[10px] uppercase tracking-widest text-warmgrey mb-4 md:mb-0">© 2026 Night Hawk. All Rights
+        Reserved.</p>
+      <div class="flex space-x-8">
+        <a href="#"
+          class="text-[10px] uppercase tracking-widest text-warmgrey hover:text-charcoal transition-colors duration-500">Instagram</a>
+        <a href="#"
+          class="text-[10px] uppercase tracking-widest text-warmgrey hover:text-charcoal transition-colors duration-500">X
+          (Twitter)</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- INFO MODAL -->
+  <div class="info-modal-overlay" id="infoModal" onclick="closeInfoModal()">
+    <div class="info-modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close-btn" onclick="closeInfoModal()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </svg>
+      </button>
+      <div class="flex items-center space-x-6 mb-8">
+        <div class="h-px w-10 bg-gold"></div>
+        <span class="text-[10px] uppercase tracking-extrawide text-warmgrey">Night Hawk / Archival</span>
+      </div>
+      <h2 class="serif text-4xl mb-8" id="modalTitle">Info Title</h2>
+      <p class="text-base text-charcoal font-light leading-relaxed tracking-wide" id="modalText">
+        Professional description goes here...
+      </p>
+    </div>
+  </div>
+
+  <!-- ARCHITECTURAL QUICK VIEW -->
+  <div id="quickViewOverlay" class="quickview-overlay" onclick="closeQuickView()">
+    <div class="quickview-container" id="quickViewContainer" onclick="event.stopPropagation()">
+      <div class="qv-close-btn" onclick="closeQuickView()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </svg>
+      </div>
+
+      <div class="qv-header-split">
+        <!-- Left Side: Imagery Stage -->
+        <div class="qv-visual-block">
+          <div class="qv-main-stage" id="qvMainStage">
+            <img src="" id="qvMainImg" alt="Product Cinematic">
+          </div>
+          <div class="qv-asset-tabs" id="qvAssetTabs">
+            <!-- Population -->
+          </div>
+        </div>
+
+        <!-- Right Side: Spec & Order -->
+        <div class="qv-detail-block">
+          <div class="mb-4">
+            <span id="qvCategory" class="text-[10px] uppercase tracking-[0.4em] text-warmgrey">Volume Study</span>
+          </div>
+          <h2 id="qvTitle" class="serif text-5xl md:text-6xl mb-8 leading-[0.95] tracking-tight">Designation</h2>
+          <div id="qvPrice" class="font-serif text-3xl text-gold mb-12">₹0.00</div>
+
+          <div class="mb-12">
+            <h4 class="text-[10px] uppercase tracking-widest text-charcoal mb-4">Internal Specification</h4>
+            <p id="qvDescription" class="text-sm font-light leading-relaxed text-charcoal/70">
+              A blueprint of restrained luxury.
+            </p>
+          </div>
+
+          <div class="mb-12">
+            <h4 class="text-[10px] uppercase tracking-widest text-charcoal mb-4">Dimension Strategy</h4>
+            <div class="flex gap-3" id="qvSizes">
+              <!-- Populated -->
+            </div>
+          </div>
+
+          <button class="btn-luxury w-full" id="qvAddToCartBtn">
+            <span class="btn-bg-gold"></span>
+            <span class="btn-text">Acquire Archival Piece</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Deep Recommendations -->
+      <div class="qv-suggestions">
+        <h3 class="serif text-2xl mb-12">Related <span class="italic text-gold">Artifacts</span></h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8" id="qvSuggestions">
+          <!-- Populated -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GLOBAL PERSISTENT PLAYER -->
+  <div class="global-player" id="globalPlayer">
+    <button class="player-toggle-btn" id="playerToggle" onclick="togglePlayerCollapse()">
+      <svg id="collapseIcon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2">
+        <path d="m6 9 6 6 6-6" />
+      </svg>
+      <svg id="expandIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        class="hidden">
+        <path d="M9 18V5l12-2v13" />
+        <circle cx="6" cy="18" r="3" />
+        <circle cx="18" cy="16" r="3" />
+      </svg>
+    </button>
+    <div class="global-seek-bar" id="seekBar">
+      <div class="global-seek-progress" id="seekProgress"></div>
+    </div>
+    <div class="global-player-inner">
+      <div class="mini-album-wrapper" id="albumArt">
+        <div class="mini-vinyl">
+          <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=600" alt="Art"
+            class="mini-album-img">
+        </div>
+      </div>
+      <div class="mini-metadata">
+        <h4 class="serif">This Little Light</h4>
+        <p>Miles Caton & Collective</p>
+      </div>
+      <div class="mini-controls">
+        <span id="currentTime" class="text-[9px] tabular-nums text-warmgrey">0:00</span>
+        <span class="mx-1 text-taupe/20">/</span>
+        <span id="totalTime" class="text-[9px] tabular-nums text-warmgrey">0:00</span>
+        <button id="playBtn" class="mini-play-trigger">
+          <svg id="playIcon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M5 3l14 9-14 9V3z" />
+          </svg>
+          <svg id="pauseIcon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" class="hidden">
+            <rect x="6" y="4" width="4" height="16" />
+            <rect x="14" y="4" width="4" height="16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="script.js"></script>
+</body>
+
+</html>
