@@ -5,12 +5,14 @@ console.log('H Hawk Script Initialized');
 // 3. To add a new product: Copy an existing object and give it a unique ID.
 
 const products = [
-  { id: 1, name: 'Shadow Fleece Hoodie', category: 'Hoodie', gender: 'Men', price: 2499, badge: 'new', sizes: ['S','M','L','XL'], icon: '🏴', image: 'products/hero_vol1.jpg' },
+  { id: 1, name: 'Acid Wash Graphic Tee', category: 'T-Shirt', gender: 'Men', price: 999, badge: 'exclusive', sizes: ['S','M','L','XL'], icon: '👕', image: 'products/hawk_tee.png?v=1.1' },
+  { id: 13, name: 'Night Hawk Target Archival Tee', category: 'T-Shirt', gender: 'Men', price: 1099, badge: 'new', sizes: ['S','M','L'], icon: '🎯', image: 'products/target_tee_front.png', gallery: ['products/target_tee_front.png', 'products/target_tee_back.png'] },
+  { id: 15, name: 'Night Hawk Valkyrie Archival Tee', category: 'T-Shirt', gender: 'Men', price: 1099, badge: 'new', sizes: ['S','M','L'], icon: '✨', image: 'products/valkyrie_bird_front.png', gallery: ['products/valkyrie_bird_front.png', 'products/valkyrie_bird_back.png'] },
   { id: 2, name: 'Hawkeye Graphic Tee', category: 'T-Shirt', gender: 'Men', price: 999, badge: 'hot', sizes: ['S','M','L','XL','XXL'], icon: '⚡', image: 'products/hero_vol1.jpg' },
   { id: 3, name: 'Stealth Track Pants', category: 'Track Pants', gender: 'Men', price: 1799, badge: 'new', sizes: ['S','M','L','XL'], icon: '🔥', image: 'products/hero_vol1.jpg' },
   { id: 4, name: 'Obsidian Crew Socks', category: 'Socks', gender: 'Unisex', price: 349, badge: 'limited', sizes: ['S/M','L/XL'], icon: '◆', image: 'products/hero_vol1.jpg' },
   { id: 5, name: 'Midnight Zip Hoodie', category: 'Hoodie', gender: 'Men', price: 2899, badge: '', sizes: ['S','M','L','XL'], icon: '🌑', image: 'products/hero_vol1.jpg' },
-  { id: 6, name: 'Combat Performance Tee', category: 'T-Shirt', gender: 'Men', price: 1199, badge: 'hot', sizes: ['S','M','L','XL','XXL'], icon: '💪', image: 'products/hero_vol1.jpg' },
+  { id: 6, name: 'Combat Performance Tee', category: 'T-Shirt', gender: 'Men', price: 999, badge: 'hot', sizes: ['S','M','L','XL','XXL'], icon: '💪', image: 'products/hero_vol1.jpg' },
   { id: 7, name: 'Elite Tapered Trousers', category: 'Trousers', gender: 'Men', price: 2199, badge: 'new', sizes: ['30','32','34','36'], icon: '🦅', image: 'products/hero_vol1.jpg' },
   { id: 8, name: 'Gold Strike Socks Pack', category: 'Socks', gender: 'Unisex', price: 699, badge: '', sizes: ['S/M','L/XL'], icon: '✦', image: 'products/hero_vol1.jpg' },
   { id: 9, name: 'Valkyrie Sports Bra', category: 'Top', gender: 'Women', price: 1299, badge: 'new', sizes: ['XS','S','M','L'], icon: '⚔️', image: 'products/hero_woman_vol1.jpg' },
@@ -24,8 +26,12 @@ let currentFilter = 'All';
 const selectedSizes = {};
 
 function renderProducts(filter = 'All') {
+  console.log('Rendering products with filter:', filter, 'RENDER_GENDER:', window.RENDER_GENDER);
   const grid = document.getElementById('productsGrid');
-  if (!grid) return;
+  if (!grid) {
+    console.warn('productsGrid element not found');
+    return;
+  }
   
   let filtered = products;
   
@@ -558,7 +564,11 @@ function initMusicPlayer() {
 
 
 
-document.addEventListener('DOMContentLoaded', initMusicPlayer);
+document.addEventListener('DOMContentLoaded', () => {
+    initMusicPlayer();
+    // Fallback render if music player's timeout didn't catch it
+    setTimeout(() => renderProducts(), 200);
+});
 
 // =================== ARCHITECTURAL QUICK VIEW ===================
 function openQuickView(id) {
