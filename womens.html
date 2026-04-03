@@ -35,6 +35,8 @@
     }
   }
 </script>
+  <!-- AUTH -->
+  <script type="module" src="auth.js"></script>
 </head>
 <body class="bg-alabaster text-charcoal antialiased relative">
 
@@ -67,7 +69,7 @@
       <button class="text-charcoal hover:text-gold transition-colors duration-500" onclick="toggleSearch()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </button>
-      <button class="text-charcoal hover:text-gold transition-colors duration-500" onclick="window.location.href='login.html'">
+      <button title="Profile" class="text-charcoal hover:text-gold transition-colors duration-500" onclick="window.location.href='login.html'">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </button>
       <button class="text-charcoal flex items-center space-x-2 group" id="cartBtn" onclick="openCart()">

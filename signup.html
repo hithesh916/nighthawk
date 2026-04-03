@@ -40,7 +40,7 @@
   </div>
 </nav>
 
-<div class="w-full max-w-md px-8 relative z-50 mx-auto pt-40">
+<div class="w-full max-w-md px-8 relative z-50 mx-auto pt-24 md:pt-40">
   <div class="text-center mb-12">
     <h1 class="serif text-5xl mb-4">The <span class="italic text-gold">Registry.</span></h1>
     <p class="text-sm font-light text-charcoal/60">Curate your exclusive profile.</p>
@@ -101,34 +101,57 @@
       showToast('Studio Connection Failed.');
     });
 
-  document.getElementById('googleSignup').addEventListener('click', () => {
+  document.getElementById('googleSignup').addEventListener('click', async () => {
     showToast('Establishing Connection...');
     
-    // Check if storage is accessible to avoid "Unable to save initial state"
-    try {
-      sessionStorage.setItem('hawk_test', '1');
-      sessionStorage.removeItem('hawk_test');
-    } catch (e) {
-      showToast('Browser Security Blocking Portal. Disable Private Mode.');
-      console.warn("Storage unreachable:", e);
-      signInWithPopup(auth, provider).then(() => {
-         window.location.href = 'index.html';
-      }).catch(err => console.error("Popup fallback failed:", err));
+    // Check storage availability
+    const isStorageAccessible = () => {
+      try {
+        sessionStorage.setItem('hawk_test', '1');
+        sessionStorage.removeItem('hawk_test');
+        return true;
+      } catch (e) {
+        return false;
+      }
+    };
+
+    if (!isStorageAccessible()) {
+      showToast('Browser Blocking Storage. Disable Private Mode.');
+      console.warn("Storage unreachable. Attempting Popup Fallback.");
+      try {
+        await signInWithPopup(auth, provider);
+        window.location.href = 'index.html';
+      } catch (err) {
+        console.error("Popup fallback failed:", err);
+        showToast('Portal Connection Blocked by Browser.');
+      }
       return;
     }
 
-    if (isMobile) {
-      signInWithRedirect(auth, provider);
-    } else {
-      signInWithPopup(auth, provider)
-        .then((result) => {
-          showToast('Identity Established.');
-          setTimeout(() => { window.location.href = 'index.html'; }, 1000);
-        })
-        .catch((error) => {
-          console.error(error);
-          showToast('Studio Connection Failed.');
-        });
+    try {
+      // PRO-STRATEGY: Try Popup first everywhere. 
+      // Redirect often fails on mobile due to "Unable to save initial state" (Storage/Cookie blocks).
+      const result = await signInWithPopup(auth, provider);
+      if (result) {
+        showToast('Identity Established.');
+        setTimeout(() => { window.location.href = 'index.html'; }, 1000);
+      }
+    } catch (error) {
+      console.error("Auth Error:", error);
+      
+      if (error.code === 'auth/popup-blocked') {
+        showToast('Popup Blocked. Switching to Redirect...');
+        try {
+          await signInWithRedirect(auth, provider);
+        } catch (redirErr) {
+          console.error("Redirect Error:", redirErr);
+          showToast('Redirect Failed. Check Browser Security.');
+        }
+      } else if (error.message.includes('Unable to save initial state')) {
+        showToast('Storage Blocked. Disable Private Mode / Cross-Site Tracking.');
+      } else {
+        showToast('Studio Connection Failed.');
+      }
     }
   });
 </script>
