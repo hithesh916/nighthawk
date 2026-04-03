@@ -1,4 +1,23 @@
-/* LUXURY EDITORIAL DESIGN SYSTEM */
+/* 0. LENIS SMOOTH SCROLL CORE */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
 
 /* 1. Paper Noise Texture */
 .noise-overlay {
@@ -40,7 +59,10 @@
 }
 
 /* 3. Global Typography & Core Overrides */
-html,
+html {
+  scroll-behavior: initial;
+}
+
 body {
   background-color: #F9F8F6;
   color: #1A1A1A;

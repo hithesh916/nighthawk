@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
@@ -165,7 +166,7 @@
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
     </button>
   </div>
-  <div class="flex-1 overflow-y-auto px-8 py-8 bg-alabaster" id="cartBody">
+  <div class="flex-1 overflow-y-auto px-8 py-8 bg-alabaster" id="cartBody" data-lenis-prevent>
     <!-- Populated by JS -->
   </div>
   <div class="border-t border-charcoal/10 bg-alabaster p-8 shrink-0" id="cartFooter">
@@ -214,7 +215,7 @@
       <input type="text" id="searchInput" onkeyup="performSearch()" placeholder="THE EDITORIAL SEARCH..." class="w-full bg-transparent text-4xl serif focus:outline-none italic placeholder:text-warmgrey/30">
       <button onclick="toggleSearch()" class="text-charcoal hover:text-gold transition-colors text-xs uppercase tracking-widest">Close</button>
     </div>
-    <div id="searchResults" class="grid grid-cols-1 gap-8 max-h-[60vh] overflow-y-auto pr-4 custom-scrollbar">
+    <div id="searchResults" class="grid grid-cols-1 gap-8 max-h-[60vh] overflow-y-auto pr-4 custom-scrollbar" data-lenis-prevent>
       <!-- Results populated by script.js -->
     </div>
   </div>
@@ -290,7 +291,7 @@
 <script>window.RENDER_GENDER = 'Women';</script>
 <!-- ARCHITECTURAL QUICK VIEW -->
 <div id="quickViewOverlay" class="quickview-overlay" onclick="closeQuickView()">
-    <div class="quickview-container" id="quickViewContainer" onclick="event.stopPropagation()">
+    <div class="quickview-container" id="quickViewContainer" onclick="event.stopPropagation()" data-lenis-prevent>
         <div class="qv-close-btn" onclick="closeQuickView()">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </div>

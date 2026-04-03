@@ -8,6 +8,8 @@
     <!-- Tailwind and Fonts setup -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -114,7 +116,7 @@
   <!-- SUMMARY Box -->
   <aside class="lg:col-span-5 h-fit lg:sticky lg:top-32 bg-alabaster border border-charcoal/10 p-8 shadow-[0_4px_24px_rgba(0,0,0,0.02)] relative z-20">
     <h3 class="serif text-2xl tracking-wide text-charcoal mb-8 border-b border-charcoal/10 pb-4">The Bag</h3>
-    <div id="checkoutList" class="mb-8 overflow-y-auto max-h-[300px]">
+    <div id="checkoutList" class="mb-8 overflow-y-auto max-h-[300px]" data-lenis-prevent>
       <!-- Populated via JS -->
     </div>
     

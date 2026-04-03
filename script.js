@@ -1,4 +1,46 @@
 console.log('H Hawk Script Initialized');
+
+/* =================== LENIS SMOOTH SCROLL =================== */
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4ba6
+  direction: 'vertical', // vertical, horizontal
+  gestureDirection: 'vertical', // vertical, horizontal, both
+  smoothWheel: true,
+  wheelMultiplier: 1,
+  smoothTouch: false,
+  touchMultiplier: 2,
+  infinite: false,
+});
+
+// Update Lenis on Scroll
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+
+requestAnimationFrame(raf);
+
+// Integrate Lenis with other scroll triggers if needed
+window.lenis = lenis;
+
+// Ensure smooth scroll to anchors uses Lenis
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(targetId);
+        if (target) {
+            lenis.scrollTo(target, {
+                offset: -100,
+                duration: 1.5,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+            });
+        }
+    });
+});
+
 // INSTRUCTIONS FOR FUTURE UPDATES:
 // 1. To change price/name: Edit the values in the 'products' array below.
 // 2. To add real images: Add image: 'path/to/img.jpg' to the product object.
@@ -100,7 +142,7 @@ function filterProducts(filter, btn) {
     btn.classList.add('text-alabaster');
   }
   const productsSection = document.getElementById('products');
-  if(productsSection) productsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if(productsSection) lenis.scrollTo(productsSection, { offset: 0, duration: 2 });
 }
 
 function selectSize(id, sz, el) {
@@ -180,7 +222,7 @@ function performSearch() {
         setTimeout(() => {
           const cards = document.querySelectorAll('.product-name');
           cards.forEach(c => {
-            if (c.textContent === p.name) c.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (c.textContent === p.name) lenis.scrollTo(c, { offset: -200, duration: 2 });
           });
         }, 100);
       } else {
@@ -329,14 +371,7 @@ function initReveals() {
 
 // stats functionality handled by scrollObserver via data-target check
 
-// =================== SMOOTH NAV ===================
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) target.scrollIntoView({ behavior: 'smooth' });
-  });
-});
+// =================== SMOOTH NAV (REPLACED BY LENIS AT TOP) ===================
 
 // =================== TOAST ===================
 function showToast(msg) {
