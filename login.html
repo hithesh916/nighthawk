@@ -148,6 +148,8 @@
         }
       } else if (error.message.includes('Unable to save initial state')) {
         showToast('Storage Blocked. Disable Private Mode / Cross-Site Tracking.');
+      } else if (error.code === 'auth/unauthorized-domain') {
+        showToast('Unauthorized Domain. Add this URL to Firebase Console.');
       } else {
         showToast('Studio Connection Failed.');
       }

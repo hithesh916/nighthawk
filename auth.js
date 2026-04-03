@@ -1,6 +1,14 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { firebaseConfig } from "./config.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyBqnA9nVNJXFVSt9CmqcePFDQg6JivIAQw",
+  authDomain: "nighthawk-ea06f.firebaseapp.com",
+  projectId: "nighthawk-ea06f",
+  storageBucket: "nighthawk-ea06f.firebasestorage.app",
+  messagingSenderId: "663976377908",
+  appId: "1:663976377908:web:b9058cd3075fadf6b59461",
+  measurementId: "G-1VBN9W8P4D"
+};
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
