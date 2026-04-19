@@ -8,7 +8,7 @@ const lenis = new Lenis({
   gestureDirection: 'vertical', // vertical, horizontal, both
   smoothWheel: true,
   wheelMultiplier: 1,
-  smoothTouch: false,
+  smoothTouch: true,
   touchMultiplier: 2,
   infinite: false,
 });
