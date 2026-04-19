@@ -499,33 +499,38 @@ function initMusicPlayer() {
     const isPlaying = localStorage.getItem('hawkMusicPlaying') === 'true';
     const savedTime = parseFloat(localStorage.getItem('hawkMusicTime')) || 0;
 
-    const performSync = () => {
-      audio.currentTime = savedTime;
-      if (isPlaying) {
-        audio.play().then(() => updateUI(true)).catch(e => {
-            console.log('Autoplay restriction: Resumption pending interaction');
-            updateUI(false);
-            
-            // Interaction Resumption Hack
-            const resumeHandler = () => {
-                if (localStorage.getItem('hawkMusicPlaying') === 'true' && audio.paused) {
-                  audio.play().then(() => updateUI(true));
-                }
-                document.removeEventListener('click', resumeHandler);
-                document.removeEventListener('touchstart', resumeHandler);
-            };
-            document.addEventListener('click', resumeHandler);
-            document.addEventListener('touchstart', resumeHandler);
-        });
-      } else {
-        updateUI(false);
-      }
-    };
-
-    if (audio.readyState >= 1) { // 1 = HAVE_METADATA
-        performSync();
+    // Apply time directly if loaded, otherwise wait for load event
+    if (audio.readyState >= 1) { 
+        audio.currentTime = savedTime;
     } else {
-        audio.addEventListener('loadedmetadata', performSync, { once: true });
+        audio.addEventListener('loadedmetadata', () => {
+            // Re-fetch in case it changed while waiting
+            const latestTime = parseFloat(localStorage.getItem('hawkMusicTime')) || savedTime;
+            audio.currentTime = latestTime;
+        }, { once: true });
+    }
+
+    if (isPlaying) {
+      audio.play().then(() => {
+          updateUI(true);
+      }).catch(e => {
+          console.log('Mobile Autoplay Blocked: Awaiting tap to resume');
+          updateUI(false);
+          
+          // Attach physical gesture detector for mobile browsers
+          const resumeHandler = () => {
+              if (localStorage.getItem('hawkMusicPlaying') === 'true') {
+                  audio.play().then(() => updateUI(true)).catch(err => console.log(err));
+              }
+              document.removeEventListener('click', resumeHandler);
+              document.removeEventListener('touchstart', resumeHandler);
+          };
+          
+          document.addEventListener('click', resumeHandler);
+          document.addEventListener('touchstart', resumeHandler);
+      });
+    } else {
+      updateUI(false);
     }
   }
 
