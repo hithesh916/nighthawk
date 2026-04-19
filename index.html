@@ -8,9 +8,7 @@
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=UnifrakturCook:wght@700&display=swap"
-    rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@300,400,500,600,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <!-- GSAP & LENIS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -21,20 +19,20 @@
       theme: {
         extend: {
           colors: {
-            alabaster: '#F9F8F6',
-            charcoal: '#1A1A1A',
-            taupe: '#EBE5DE',
-            warmgrey: '#6C6863',
-            gold: '#D4AF37',
+            alabaster: '#0A0A0A',
+            charcoal: '#F3F3F3',
+            taupe: '#222222',
+            warmgrey: '#818181',
+            gold: '#FFFFFF',
           },
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            serif: ['Playfair Display', 'serif'],
+            sans: ['General Sans', 'sans-serif'],
+            serif: ['General Sans', 'sans-serif'],
           },
           letterSpacing: {
-            wide: '0.1em',
-            wider: '0.2em',
-            widest: '0.3em',
+            wide: '0.02em',
+            wider: '0.05em',
+            widest: '0.1em',
           }
         }
       }
@@ -62,7 +60,7 @@
     <div class="max-w-[1600px] mx-auto px-8 md:px-16 flex items-center justify-between h-20">
       <a href="index.html" class="flex items-center group">
         <img src="logo.png"
-          class="h-8 md:h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
+          class="h-8 md:h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-105 invert"
           alt="NIGHT HAWK">
       </a>
 
@@ -128,7 +126,7 @@
     <div
       class="absolute top-[10%] md:top-[12%] right-8 md:right-16 md:w-[32%] lg:w-[35%] aspect-[3/4] z-0 group hidden md:block reveal">
       <div class="w-full h-full relative img-shadow-wrapper">
-        <img src="products/hero_vol1.jpg" alt="Night Hawk Vol. 01" class="cinematic-img">
+        <video src="video/WhatsApp Video 2026-04-19 at 4.47.10 PM.mp4" autoplay loop muted playsinline class="cinematic-img w-full h-full object-cover"></video>
         <!-- Inner Border for Depth -->
         <div class="absolute inset-0 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.06)] pointer-events-none"></div>
       </div>
@@ -149,8 +147,11 @@
 
       <!-- PREMIUM MUSIC PLAYER COMPONENT -->
       <div class="mb-12 reveal" style="transition-delay: 200ms;">
-        <div class="music-player-card">
-          <div class="player-inner">
+        <div class="music-player-card" style="background: transparent; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+          <!-- Background Video -->
+          <video src="video/WhatsApp Video 2026-04-14 at 4.23.04 PM.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 opacity-70 pointer-events-none"></video>
+          
+          <div class="player-inner relative z-10" style="position: relative;">
             <div class="album-art-wrapper" id="albumArt">
               <div class="vinyl-record">
                 <div class="record-center"></div>
@@ -161,8 +162,8 @@
 
             <div class="player-info">
               <div class="metadata">
-                <h3 class="serif text-xl tracking-wide text-charcoal">This Little Light of Mine</h3>
-                <p class="text-[10px] uppercase tracking-widest text-warmgrey">Gospel Archive / Series 1</p>
+                <h3 class="serif text-xl tracking-wide text-charcoal">Hunting The Wren - The Immortal Man Version</h3>
+                <p class="text-[10px] uppercase tracking-widest text-warmgrey">Lankum / SpotiDost</p>
               </div>
 
               <div class="controls-area">
@@ -192,7 +193,7 @@
           <!-- Global Audio Element -->
           <audio id="mainAudio" preload="auto">
             <source
-              src="music/Miles Caton, DC6 Singers Collective, Pleasant Valley Youth Choir of New Orleans - This Little Light of Mine (SPOTISAVER).mp3"
+              src="music/Hunting The Wren - The Immortal Man Version_SpotiDost - Lankum.mp3"
               type="audio/mpeg">
           </audio>
         </div>
@@ -287,7 +288,7 @@
   <div class="fixed inset-0 bg-alabaster z-[110] transition-transform duration-700 translate-x-full" id="mobileMenu">
     <div class="flex flex-col h-full px-8 py-12">
       <div class="flex justify-between items-center mb-24">
-        <img src="logo.png" class="h-10 w-auto" alt="Logo">
+        <img src="logo.png" class="h-10 w-auto invert" alt="Logo">
         <button onclick="toggleMobileMenu()" class="text-charcoal">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M18 6 6 18" />
@@ -346,7 +347,7 @@
     class="w-full max-w-[1600px] mx-auto px-8 md:px-16 py-20 pb-10 border-t border-charcoal/10 reveal">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-16 mb-24">
       <div class="md:col-span-5">
-        <img src="logo.png" class="h-10 w-auto mb-8 object-contain" alt="NIGHT HAWK">
+        <img src="logo.png" class="h-10 w-auto mb-8 object-contain invert" alt="NIGHT HAWK">
         <p class="text-charcoal/60 text-sm leading-relaxed max-w-sm font-light mb-12">
           Sign up for exclusive access to restricted drops, early volume releases, and specialized editorial campaigns.
         </p>

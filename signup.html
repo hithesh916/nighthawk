@@ -5,22 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REGISTRY — Night Hawk</title>
     <link rel="icon" type="image/png" href="logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=general-sans@300,400,500,600,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: { alabaster: '#F9F8F6', charcoal: '#1A1A1A', taupe: '#EBE5DE', warmgrey: '#6C6863', gold: '#D4AF37' },
-            fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] },
-            letterSpacing: { widest: '0.3em' }
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            alabaster: '#0A0A0A',
+            charcoal: '#F3F3F3',
+            taupe: '#222222',
+            warmgrey: '#818181',
+            gold: '#FFFFFF',
+          },
+          fontFamily: {
+            sans: ['General Sans', 'sans-serif'],
+            serif: ['General Sans', 'sans-serif'],
+          },
+          letterSpacing: {
+            wide: '0.02em',
+            wider: '0.05em',
+            widest: '0.1em',
           }
         }
       }
-    </script>
+    }
+  </script>
 </head>
 <body class="bg-alabaster text-charcoal antialiased relative selection:bg-charcoal selection:text-alabaster min-h-screen flex flex-col items-center justify-center py-20">
 
@@ -36,7 +49,7 @@
 <nav class="fixed top-0 w-full z-40 bg-alabaster/90 backdrop-blur-md border-b border-charcoal/10 transition-all duration-700">
   <div class="max-w-[1600px] mx-auto px-8 md:px-16 flex items-center justify-between h-20">
     <a href="index.html" class="flex items-center">
-      <img src="logo.png" class="h-10 md:h-12 w-auto object-contain" alt="NIGHT HAWK">
+      <img src="logo.png" class="h-10 md:h-12 w-auto object-contain invert" alt="NIGHT HAWK">
     </a>
     <span class="text-[10px] uppercase tracking-widest text-warmgrey">Client Registry</span>
   </div>

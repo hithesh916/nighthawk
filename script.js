@@ -756,4 +756,3 @@ function renderQuickSuggestions(category, currentId) {
 
 window.openQuickView = openQuickView;
 window.closeQuickView = closeQuickView;
-
