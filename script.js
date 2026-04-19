@@ -499,36 +499,41 @@ function initMusicPlayer() {
     const isPlaying = localStorage.getItem('hawkMusicPlaying') === 'true';
     const savedTime = parseFloat(localStorage.getItem('hawkMusicTime')) || 0;
 
-    // Apply time directly if loaded, otherwise wait for load event
-    if (audio.readyState >= 1) { 
-        audio.currentTime = savedTime;
+    let hasResumed = false;
+    const enforceTime = () => {
+        if (!hasResumed && audio.readyState >= 2) { // HAVE_CURRENT_DATA
+            audio.currentTime = parseFloat(localStorage.getItem('hawkMusicTime')) || 0;
+            hasResumed = true;
+        }
+    };
+
+    if (audio.readyState >= 2) {
+        enforceTime();
     } else {
-        audio.addEventListener('loadedmetadata', () => {
-            // Re-fetch in case it changed while waiting
-            const latestTime = parseFloat(localStorage.getItem('hawkMusicTime')) || savedTime;
-            audio.currentTime = latestTime;
-        }, { once: true });
+        audio.addEventListener('canplay', enforceTime, { once: true });
+        audio.addEventListener('loadedmetadata', enforceTime, { once: true });
     }
 
     if (isPlaying) {
-      audio.play().then(() => {
-          updateUI(true);
-      }).catch(e => {
-          console.log('Mobile Autoplay Blocked: Awaiting tap to resume');
-          updateUI(false);
-          
-          // Attach physical gesture detector for mobile browsers
-          const resumeHandler = () => {
-              if (localStorage.getItem('hawkMusicPlaying') === 'true') {
-                  audio.play().then(() => updateUI(true)).catch(err => console.log(err));
-              }
-              document.removeEventListener('click', resumeHandler);
-              document.removeEventListener('touchstart', resumeHandler);
-          };
-          
-          document.addEventListener('click', resumeHandler);
-          document.addEventListener('touchstart', resumeHandler);
-      });
+      const playAttempt = audio.play();
+      if (playAttempt !== undefined) {
+          playAttempt.then(() => {
+              updateUI(true);
+          }).catch(e => {
+              console.log('Autoplay restriction intercepted. Waiting for manual tap.');
+              updateUI(false);
+              
+              const mobileResumeTask = () => {
+                  if (localStorage.getItem('hawkMusicPlaying') === 'true') {
+                      audio.play().then(() => updateUI(true)).catch(() => {});
+                  }
+                  document.removeEventListener('click', mobileResumeTask);
+                  document.removeEventListener('touchstart', mobileResumeTask);
+              };
+              document.addEventListener('click', mobileResumeTask);
+              document.addEventListener('touchstart', mobileResumeTask);
+          });
+      }
     } else {
       updateUI(false);
     }
