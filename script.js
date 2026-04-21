@@ -427,28 +427,119 @@ function subscribeEmail() {
 /* 17. EDITORIAL INFO MODAL SYSTEM */
 const infoDict = {
     'About': {
-        title: 'The Studio',
-        text: 'NIGHT HAWK is an avant-garde editorial platform focused on specialized performance apparel and restricted silhouettes. We bridge the gap between cinematic world-building and technical garment architecture.'
+        title: 'THE STUDIO / ARCHIVE',
+        text: `
+            <div class="space-y-6">
+                <p class="drop-cap">NIGHT HAWK exists at the intersection of cinematic world-building and technical garment architecture. We do not merely produce apparel; we architect systems for the moving human form.</p>
+                <div class="grid grid-cols-2 gap-8 mt-12 pt-8 border-t border-white/5">
+                    <div>
+                        <h4 class="text-[10px] uppercase tracking-widest text-gold mb-4">Philosophy</h4>
+                        <p class="text-xs text-charcoal/60 leading-relaxed">Functionalism stripped of redundancy. Every stitch is a deliberate act of precision.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-[10px] uppercase tracking-widest text-gold mb-4">Location</h4>
+                        <p class="text-xs text-charcoal/60 leading-relaxed">Headquartered in the shadows. Operating on a global editorial frequency.</p>
+                    </div>
+                </div>
+            </div>
+        `
     },
     'Manifesto': {
-        title: 'The Manifesto',
-        text: 'We believe luxury isn\'t achieved by adding decorations, but by stripping away everything unnecessary until only the soul remains. Every garment we architect is a testament to restricted excellence and high-performance tactical design.'
+        title: 'THE MANIFESTO',
+        text: `
+            <div class="space-y-8">
+                <p class="text-xl serif italic text-gold leading-tight">"Luxury is not the presence of decoration, but the absence of error."</p>
+                <div class="space-y-4">
+                    <p class="text-sm font-light text-charcoal leading-relaxed">We believe in the power of restraint. In a world of excessive noise, Night Hawk represents a silent, precise frequency. Our garments are designed to disappear until they are needed, then perform with absolute reliability.</p>
+                    <ul class="space-y-3 pt-4">
+                        <li class="flex items-center space-x-4 text-[10px] uppercase tracking-widest">
+                            <span class="w-1 h-1 bg-gold rounded-full"></span>
+                            <span>Restricted Silhouettes</span>
+                        </li>
+                        <li class="flex items-center space-x-4 text-[10px] uppercase tracking-widest">
+                            <span class="w-1 h-1 bg-gold rounded-full"></span>
+                            <span>Architectural Integrity</span>
+                        </li>
+                        <li class="flex items-center space-x-4 text-[10px] uppercase tracking-widest">
+                            <span class="w-1 h-1 bg-gold rounded-full"></span>
+                            <span>Technical Performance</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        `
     },
     'Careers': {
-        title: 'Join the Studio',
-        text: 'We are constantly seeking visionary designers, technical specialists, and editorial creators who challenge the traditional boundaries of performance luxury. Inquiries: nighthawkpvt@gmail.com'
+        title: 'VISIONARY INQUIRIES',
+        text: `
+            <div class="space-y-6">
+                <p class="text-sm text-charcoal/70 leading-relaxed">We are seeking outliers. Individuals who bridge the gap between traditional craftsmanship and future-leaning technical implementation.</p>
+                <div class="mt-8 space-y-4">
+                    <div class="p-4 border border-white/5 hover:border-gold/30 transition-colors">
+                        <h4 class="text-[10px] uppercase tracking-widest text-gold mb-1">Garmet Architect</h4>
+                        <p class="text-[10px] text-warmgrey">Pattern Design / Material Science</p>
+                    </div>
+                    <div class="p-4 border border-white/5 hover:border-gold/30 transition-colors">
+                        <h4 class="text-[10px] uppercase tracking-widest text-gold mb-1">Editorial Specialist</h4>
+                        <p class="text-[10px] text-warmgrey">Visual Protocol / Narrative Strategy</p>
+                    </div>
+                </div>
+                <p class="text-[10px] uppercase tracking-widest text-warmgrey mt-8 pt-8 border-t border-white/5 text-center">
+                    Direct Port: <a href="mailto:nighthawkpvt@gmail.com" class="text-gold underline">careers@nighthawk.archive</a>
+                </p>
+            </div>
+        `
     },
     'Shipping': {
-        title: 'Global Logistics',
-        text: 'We provide complimentary global logistics for all orders exceeding ?15,000. Every shipment is tracked with specialized insurance and archival-quality packaging to ensure your piece arrives in immaculate condition.'
+        title: 'LOGISTICS PROTOCOL',
+        text: `
+            <div class="space-y-6">
+                <p class="text-sm text-charcoal/80">Every piece is dispatched under specialized archival protection to ensure geometric integrity during transit.</p>
+                <div class="grid grid-cols-1 gap-4 mt-8">
+                    <div class="flex justify-between border-b border-white/5 pb-2">
+                        <span class="text-[10px] uppercase tracking-widest text-warmgrey">Domestic (IN)</span>
+                        <span class="text-[10px] uppercase tracking-widest text-gold">2-4 Cycles</span>
+                    </div>
+                    <div class="flex justify-between border-b border-white/5 pb-2">
+                        <span class="text-[10px] uppercase tracking-widest text-warmgrey">International</span>
+                        <span class="text-[10px] uppercase tracking-widest text-gold">7-10 Cycles</span>
+                    </div>
+                </div>
+                <p class="text-[9px] italic text-warmgrey mt-4">Complimentary logistics on all orders exceeding ₹15,000.</p>
+            </div>
+        `
     },
     'Returns': {
-        title: 'Exchange Policy',
-        text: 'We offer an 11-day editorial inspection window. Returned items must maintain all original archival tags, security seals, and specialized packaging in unused condition. Please contact nighthawkpvt@gmail.com to initiate.'
+        title: 'ARCHIVAL INTEGRITY',
+        text: `
+            <div class="space-y-6">
+                <p class="text-sm text-charcoal/80">We offer an 11-day editorial inspection window. Returned artifacts must maintain absolute archival status.</p>
+                <ul class="text-[10px] uppercase tracking-[0.2em] space-y-3 text-warmgrey list-none p-0">
+                    <li>→ Security seals must remain intact</li>
+                    <li>→ Original specialized packaging required</li>
+                    <li>→ Zero sign of atmospheric exposure</li>
+                </ul>
+                <div class="mt-8 pt-8 border-t border-white/5">
+                    <button class="text-[10px] uppercase tracking-widest text-gold underline">Initiate Protocol</button>
+                </div>
+            </div>
+        `
     },
     'Sizing': {
-        title: 'Measurement Guide',
-        text: 'Our silhouettes are meticulously architected for the moving human form. We utilize specialized sizing blocks that bridge the gap between oversized street-style and tailored precision. Consult our Studio Guide for exact body-mapping details.'
+        title: 'FIT METHODOLOGY',
+        text: `
+            <div class="space-y-6">
+                <p class="text-sm text-charcoal/80">Our silhouettes are architected for dynamic performance. We utilize a proprietary "Shadow Fit" system.</p>
+                <div class="p-6 bg-white/[0.02] border border-white/5">
+                    <h4 class="text-[10px] uppercase tracking-widest text-gold mb-4">Volume Strategy</h4>
+                    <p class="text-[11px] leading-relaxed text-warmgrey">
+                        <strong class="text-charcoal block mb-1">Standard:</strong> Precise alignment with anatomical measurements.<br>
+                        <strong class="text-charcoal block mt-3 mb-1">Oversized:</strong> Intentional volume for architectural drape.<br>
+                        <strong class="text-charcoal block mt-3 mb-1">Compression:</strong> Restricted flex for high-performance application.
+                    </p>
+                </div>
+            </div>
+        `
     }
 };
 
@@ -457,7 +548,7 @@ function openInfoModal(topic) {
     if (!data) return;
     
     document.getElementById('modalTitle').textContent = data.title;
-    document.getElementById('modalText').textContent = data.text;
+    document.getElementById('modalText').innerHTML = data.text;
     document.getElementById('infoModal').classList.add('show');
     document.body.style.overflow = 'hidden'; // Lock background scroll
 }

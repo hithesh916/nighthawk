@@ -405,12 +405,12 @@ body {
 .info-modal-overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(26, 26, 26, 0.5);
-  backdrop-filter: blur(8px);
-  z-index: 100;
+  background-color: rgba(10, 10, 10, 0.85); /* Darker backdrop */
+  backdrop-filter: blur(20px) saturate(180%);
+  z-index: 1000;
   opacity: 0;
   pointer-events: none;
-  transition: all 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -423,15 +423,15 @@ body {
 }
 
 .info-modal-content {
-  background-color: #F9F8F6;
+  background-color: #0A0A0A; /* Dark mode modal */
   width: 100%;
-  max-width: 600px;
-  padding: 4rem;
+  max-width: 640px;
+  padding: 5rem 4rem;
   position: relative;
-  transform: translateY(40px);
-  transition: transform 800ms cubic-bezier(0.19, 1, 0.22, 1);
-  border: 1px solid rgba(26, 26, 26, 0.1);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+  transform: translateY(60px);
+  transition: transform 1200ms cubic-bezier(0.19, 1, 0.22, 1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
 }
 
 .info-modal-overlay.show .info-modal-content {
@@ -440,14 +440,52 @@ body {
 
 .modal-close-btn {
   position: absolute;
-  top: 2rem;
-  right: 2rem;
-  color: #1A1A1A;
-  transition: color 500ms ease;
+  top: 3rem;
+  right: 3rem;
+  color: #F3F3F3;
+  transition: all 500ms ease;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
 }
 
 .modal-close-btn:hover {
-  color: #D4AF37;
+  color: #FFFFFF;
+  transform: rotate(90deg);
+}
+
+#modalTitle {
+  color: #F3F3F3;
+  font-size: 2.5rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+}
+
+#modalText {
+  color: #F3F3F3;
+}
+
+#modalText .drop-cap::first-letter {
+    color: #FFFFFF;
+}
+
+#modalText p {
+    color: rgba(243, 243, 243, 0.8);
+    line-height: 1.8;
+}
+
+#modalText .text-gold {
+    color: #FFFFFF; /* Ensure gold is readable or actual gold */
+}
+
+#modalText .text-charcoal {
+    color: #F3F3F3;
+}
+
+#modalText .text-warmgrey {
+    color: rgba(243, 243, 243, 0.5);
 }
 
 
